@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d16">
+
+    <title>CineScope AI | Movie Intelligence</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <a href="#overview" class="brand">
+                <span class="brand-icon">C</span>
+                <span>
+                    <strong>CineScope <span>AI</span></strong>
+                    <small>MOVIE INTELLIGENCE</small>
+                </span>
+            </a>
+
+            <div class="side-label">WORKSPACE</div>
+
+            <nav class="navigation">
+                <a href="#overview" class="nav-link active">
+                    <span>◈</span> Overview
+                </a>
+                <a href="#movies" class="nav-link">
+                    <span>▣</span> Movie Explorer
+                </a>
+                <a href="#comparison" class="nav-link">
+                    <span>⚖</span> Comparison
+                </a>
+                <a href="#analytics" class="nav-link">
+                    <span>⌁</span> Analytics
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="status-dot"></div>
+                <div>
+                    <strong>System Online</strong>
+                    <small>Movie Intelligence v1.0</small>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <div>
+                    <div class="eyebrow">INTELLIGENCE DASHBOARD</div>
+                    <h1>Movie Universe<span class="accent">.</span></h1>
+                </div>
+
+                <div class="system-badge">
+                    <span class="status-dot"></span>
+                    <span id="apiStatus">CONNECTING TO API...</span>
+                </div>
+            </header>
+
+            <!-- OVERVIEW -->
+            <section id="overview" class="hero">
+                <div class="hero-content">
+                    <div class="eyebrow">YOUR CINEMA COMMAND CENTER</div>
+
+                    <h2>
+                        Every movie.<br>
+                        <span>One intelligence.</span>
+                    </h2>
+
+                    <p>
+                        Explore ratings, discover cinema, and uncover
+                        insights from your movie database.
+                    </p>
+
+                    <a href="#movies" class="primary-button">
+                        Explore Movies <span>↗</span>
+                    </a>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="orbit orbit-three"></div>
+                    <div class="core-symbol">C<span>AI</span></div>
+                    <div class="orbit-label">CINEMA INTELLIGENCE</div>
+                </div>
+            </section>
+
+            <!-- STATISTICS -->
+            <section class="stats-grid" aria-label="Movie statistics">
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">TOTAL MOVIES</span>
+                        <span class="stat-icon">▣</span>
+                    </div>
+                    <h3 id="totalMovies">—</h3>
+                    <p>Database collection</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">AVERAGE RATING</span>
+                        <span class="stat-icon">★</span>
+                    </div>
+                    <h3><span id="avgRating">—</span><small>/10</small></h3>
+                    <p>Average movie score</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">SCRAPE RUNS</span>
+                        <span class="stat-icon">⌁</span>
+                    </div>
+                    <h3 id="totalScrapes">—</h3>
+                    <p>Data collection history</p>
+                </article>
+            </section>
+
+            <!-- MOVIE EXPLORER -->
+            <section id="movies" class="content-section">
+                <div class="section-heading">
+                    <div>
+                        <div class="eyebrow">CURATED CINEMA</div>
+                        <h2>Movie Explorer</h2>
+                        <p>Discover and explore movies in your collection.</p>
+                    </div>
+
+                    <span class="section-count" id="movieCount">Loading...</span>
+                </div>
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <span>⌕</span>
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search movie, genre or year..."
+                            aria-label="Search movies"
+                        >
+                    </div>
+
+                    <select id="sortSelect" aria-label="Sort movies">
+                        <option value="rank">Top Ranked</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="year">Newest Year</option>
+                    </select>
+                </div>
+
+                <div id="movieGrid" class="movie-grid">
+                    <div class="loading-state">Connecting to CineScope API...</div>
+                </div>
+            </section>
+
+            <!-- COMPARISON -->
+            <section id="comparison" class="content-section">
+                <div class="section-heading">
+                    <div>
+                        <div class="eyebrow">HEAD-TO-HEAD ANALYSIS</div>
+                        <h2>Movie Comparison</h2>
+                        <p>Compare ratings between two movies.</p>
+                    </div>
+                </div>
+
+                <div class="comparison-panel">
+                    <div class="compare-select">
+                        <label for="compareMovie1">FIRST MOVIE</label>
+                        <select id="compareMovie1">
+                            <option value="">Select first movie</option>
+                        </select>
+                    </div>
+
+                    <div class="versus">VS</div>
+
+                    <div class="compare-select">
+                        <label for="compareMovie2">SECOND MOVIE</label>
+                        <select id="compareMovie2">
+                            <option value="">Select second movie</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="compareButton" class="primary-button">
+                        Compare Movies ↗
+                    </button>
+
+                    <div
+                        id="comparisonResult"
+                        class="comparison-result"
+                        aria-live="polite"
+                    >
+                        Select two movies to compare their ratings.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ANALYTICS -->
+            <section id="analytics" class="content-section">
+                <div class="section-heading">
+                    <div>
+                        <div class="eyebrow">DATA INTELLIGENCE</div>
+                        <h2>Movie Analytics</h2>
+                        <p>Explore the highest-rated movies in your database.</p>
+                    </div>
+                </div>
+
+                <div class="analytics-summary">
+                    <article class="analytics-card">
+                        <span class="stat-label">HIGHEST RATED MOVIE</span>
+                        <h3 id="highestMovie">Loading...</h3>
+                        <p>Top rating in your database</p>
+                    </article>
+
+                    <article class="analytics-card">
+                        <span class="stat-label">TOP MOVIE RATING</span>
+                        <h3><span id="highestRating">—</span><small>/10</small></h3>
+                        <p>Highest available rating</p>
+                    </article>
+
+                    <article class="analytics-card">
+                        <span class="stat-label">AVAILABLE MOVIES</span>
+                        <h3 id="analyticsMovieCount">—</h3>
+                        <p>Movies analysed</p>
+                    </article>
+                </div>
+
+                <div class="chart-panel">
+                    <div class="chart-heading">
+                        <div>
+                            <div class="eyebrow">RATING ANALYSIS</div>
+                            <h3>Top 10 Highest-Rated Movies</h3>
+                        </div>
+                        <span class="chart-badge">LIVE DATA</span>
+                    </div>
+
+                    <div id="ratingChart" class="rating-chart">
+                        <div class="loading-state">Loading analytics...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="footer-brand">
+                    <span class="brand-icon small">C</span>
+                    <strong>CineScope AI</strong>
+                </div>
+                <p>Built for cinema intelligence.</p>
+                <a href="/api/health" target="_blank" rel="noopener noreferrer">
+                    Backend status ↗
+                </a>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Load JavaScript through the FastAPI static route -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
